@@ -1,0 +1,84 @@
+@prefix atom: <http://lv2plug.in/ns/ext/atom#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix midi: <http://lv2plug.in/ns/ext/midi#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix urid: <http://lv2plug.in/ns/ext/urid#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<urn:bariyan:midi-pitchbend-cc-tester>
+    a lv2:Plugin ;
+    doap:name "MIDI Pitch Bend / CC Tester" ;
+    doap:maintainer [ foaf:name "Atsushi Nishihata(Bariyan)" ] ;
+    lv2:requiredFeature urid:map ;
+
+    lv2:port
+    [ 
+        a lv2:OutputPort , atom:AtomPort ;
+        lv2:index 0 ;
+        lv2:symbol "out" ;
+        atom:bufferType atom:Sequence ;
+        atom:supports midi:MidiEvent ;
+        lv2:minimumSize 2048 ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 1 ;
+        lv2:symbol "enable" ;
+        lv2:default 0 ;
+        lv2:minimum 0 ;
+        lv2:maximum 1 ;
+        lv2:portProperty lv2:toggled ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 2 ;
+        lv2:symbol "interval_ms" ;
+        lv2:default 100 ;
+        lv2:minimum 1 ;
+        lv2:maximum 2000 ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 3 ;
+        lv2:symbol "channel" ;
+        lv2:default 0 ;
+        lv2:minimum 0 ;
+        lv2:maximum 15 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 4 ;
+        lv2:symbol "pb_value" ;
+        lv2:default 0 ;
+        lv2:minimum -8192 ;
+        lv2:maximum 8191 
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ; 
+        lv2:index 5 ; 
+        lv2:symbol "cc_msb_number" ;
+        lv2:default 1 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 6 ;
+        lv2:symbol "cc_msb_value" ;
+        lv2:default 0 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 7 ;
+        lv2:symbol "cc_lsb_value" ;
+        lv2:default 0 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ] .
