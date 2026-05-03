@@ -38,4 +38,4 @@ make install
 | **PB Value** | `pb_value` | 0 | -8192 - 8191 | ピッチベンドの値 |
 | **CC MSB Number** | `cc_msb_number` | 1 | 0 - 31 | 送信するCC（MSB）の番号 |
 | **CC MSB Value** | `cc_msb_value` | 0 | 0 - 127 | 送信するCC（MSB）の値 |
-| **CC LSB Value** | `cc_lsb_value` | LSBの値（0 - 127）。**1以上の場合のみ**LSBメッセージを送出 |
+| **CC LSB Value** | `cc_lsb_value` | 0 | 0 - 127 | CC LSBの値 **1以上の場合のみ**送出 |

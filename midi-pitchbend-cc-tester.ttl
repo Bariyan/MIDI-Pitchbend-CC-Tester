@@ -17,6 +17,7 @@
         a lv2:OutputPort , atom:AtomPort ;
         lv2:index 0 ;
         lv2:symbol "out" ;
+        lv2:name "MIDI Out" ;
         atom:bufferType atom:Sequence ;
         atom:supports midi:MidiEvent ;
         lv2:minimumSize 2048 ;
@@ -25,15 +26,17 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 1 ;
         lv2:symbol "enable" ;
+        lv2:name "Enable" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 1 ;
-        lv2:portProperty lv2:toggled ;
+        lv2:portProperty lv2:integer ;
     ],
     [
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 2 ;
         lv2:symbol "interval_ms" ;
+        lv2:name "Interval(ms)" ;
         lv2:default 100 ;
         lv2:minimum 1 ;
         lv2:maximum 2000 ;
@@ -42,6 +45,7 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 3 ;
         lv2:symbol "channel" ;
+        lv2:name "MIDI Channel" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 15 ;
@@ -51,6 +55,7 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 4 ;
         lv2:symbol "pb_value" ;
+        lv2:name "Pitchend Value" ;
         lv2:default 0 ;
         lv2:minimum -8192 ;
         lv2:maximum 8191 
@@ -59,6 +64,7 @@
         a lv2:InputPort , lv2:ControlPort ; 
         lv2:index 5 ; 
         lv2:symbol "cc_msb_number" ;
+        lv2:name "CC Number (MSB)" ;
         lv2:default 1 ;
         lv2:minimum 0 ;
         lv2:maximum 127 ;
@@ -68,6 +74,7 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 6 ;
         lv2:symbol "cc_msb_value" ;
+        lv2:name "CC Value (MSB)" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 127 ;
@@ -77,6 +84,7 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 7 ;
         lv2:symbol "cc_lsb_value" ;
+        lv2:name "CC Value (LSB)" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 127 ;
