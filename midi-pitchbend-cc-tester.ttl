@@ -8,7 +8,7 @@
 
 <urn:bariyan:midi-pitchbend-cc-tester>
     a lv2:Plugin ;
-    doap:name "MIDI Pitch Bend / CC Tester" ;
+    doap:name "EWI MIDI Tester" ;
     doap:maintainer [ foaf:name "Atsushi Nishihata(Bariyan)" ] ;
     lv2:requiredFeature urid:map ;
 
@@ -26,7 +26,7 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 1 ;
         lv2:symbol "enable" ;
-        lv2:name "Enable" ;
+        lv2:name "Enable (Note On/Off)" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 1 ;
@@ -36,8 +36,8 @@
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 2 ;
         lv2:symbol "interval_ms" ;
-        lv2:name "Interval(ms)" ;
-        lv2:default 100 ;
+        lv2:name "CC/PB Interval(ms)" ;
+        lv2:default 20 ;
         lv2:minimum 1 ;
         lv2:maximum 2000 ;
     ],
@@ -54,27 +54,47 @@
     [
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 4 ;
-        lv2:symbol "pb_value" ;
-        lv2:name "Pitchend Value" ;
-        lv2:default 0 ;
-        lv2:minimum -8192 ;
-        lv2:maximum 8191 
+        lv2:symbol "note_number" ;
+        lv2:name "Note Number" ;
+        lv2:default 60 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
     ],
     [
-        a lv2:InputPort , lv2:ControlPort ; 
-        lv2:index 5 ; 
-        lv2:symbol "cc_msb_number" ;
-        lv2:name "CC Number (MSB)" ;
-        lv2:default 1 ;
-        lv2:minimum 0 ;
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 5 ;
+        lv2:symbol "velocity" ;
+        lv2:name "Velocity" ;
+        lv2:default 64 ;
+        lv2:minimum 1 ;
         lv2:maximum 127 ;
         lv2:portProperty lv2:integer ;
     ],
     [
         a lv2:InputPort , lv2:ControlPort ;
         lv2:index 6 ;
-        lv2:symbol "cc_msb_value" ;
-        lv2:name "CC Value (MSB)" ;
+        lv2:symbol "pb_value" ;
+        lv2:name "Pitch Bend Value" ;
+        lv2:default 0 ;
+        lv2:minimum -8192 ;
+        lv2:maximum 8191 ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 7 ;
+        lv2:symbol "cc_breath" ;
+        lv2:name "Breath (CC #2)" ;
+        lv2:default 100 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 8 ;
+        lv2:symbol "cc_expression" ;
+        lv2:name "Expression (CC #11)" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 127 ;
@@ -82,9 +102,29 @@
     ],
     [
         a lv2:InputPort , lv2:ControlPort ;
-        lv2:index 7 ;
-        lv2:symbol "cc_lsb_value" ;
-        lv2:name "CC Value (LSB)" ;
+        lv2:index 9 ;
+        lv2:symbol "cc_modulation" ;
+        lv2:name "Modulation (CC #1)" ;
+        lv2:default 0 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 10 ;
+        lv2:symbol "cc_extra_num" ;
+        lv2:name "Extra CC Number" ;
+        lv2:default 7 ;
+        lv2:minimum 0 ;
+        lv2:maximum 127 ;
+        lv2:portProperty lv2:integer ;
+    ],
+    [
+        a lv2:InputPort , lv2:ControlPort ;
+        lv2:index 11 ;
+        lv2:symbol "cc_extra_val" ;
+        lv2:name "Extra CC Value" ;
         lv2:default 0 ;
         lv2:minimum 0 ;
         lv2:maximum 127 ;

@@ -1,12 +1,12 @@
-# MIDI Pitch Bend / CC Tester
+# EWI MIDI Message Tester / Emulator
 
-指定した時間間隔でMIDIピッチベンドおよびコントロールチェンジ（CC）メッセージを自動送出するLV2プラグインです。MIDIインストゥルメントの動作確認や、14bit CC/ピッチベンドのマッピングテスト等に使用できます。
+EWI（ウインドシンセサイザー）特有のMIDI制御メッセージ（Note, Pitch Bend, Breath Control, Expression, Modulation等）を擬似出力するLV2プラグインです。ソフト音源やエフェクトのブレスレスポンス評価やマッピングテスト等に使用できます。
 
 ## 特徴
 
-* **自動送出機能**: 設定したミリ秒間隔でメッセージを繰り返し送信します。
-* **ピッチベンド対応**: -8192 〜 8191 の範囲で値を指定可能です。
-* **自動14bit CC送出**: CC番号が 0-31 で、かつ LSB Value が 1 以上の場合に対応する LSB を自動送出します。
+* **ノートトリガー機能**: Enable を ON にすると Note On、OFF にすると Note Off を発行します。
+* **スラー対応**: 演奏中に Note Number を変更すると、直前のノートの Note Off と新しいノートの Note On を連続発行します。
+* **高頻度CC/PB送出**: 設定したミリ秒間隔（デフォルト 20ms）で Pitch Bend および各種 CC（Breath, Expression, Modulation, Extra CC）を継続送信します。
 
 ## ビルドとインストール
 
@@ -16,26 +16,29 @@
 * `build-essential` (gcc, make)
 
 ### 手順
-ターミナルで以下のコマンドを実行してください。
 
 ```bash
 # ビルド
 make
 
-# インストール（デフォルトは ~/.lv2/ に配置されます）
+# インストール（~/.lv2/ に配置されます）
 make install
+
 ```
 
 ## パラメータ仕様
 
-プラグインのコントロールポートの詳細は以下の通りです。
-
 | ポート名 | 内部シンボル | デフォルト | 範囲 | 説明 |
-| :--- | :--- | :--- | :--- | :--- |
-| **Enable** | `enable` | 0 (Off) | 0 - 1 | 1のときメッセージ送信を開始 |
-| **Interval (ms)** | `interval_ms` | 100 | 1 - 2000 | メッセージを送出する間隔（ミリ秒） |
-| **Channel** | `channel` | 0 | 0 - 15 | 送信先MIDIチャンネル（Ch 1 - 16） |
-| **PB Value** | `pb_value` | 0 | -8192 - 8191 | ピッチベンドの値 |
-| **CC MSB Number** | `cc_msb_number` | 1 | 0 - 31 | 送信するCC（MSB）の番号 |
-| **CC MSB Value** | `cc_msb_value` | 0 | 0 - 127 | 送信するCC（MSB）の値 |
-| **CC LSB Value** | `cc_lsb_value` | 0 | 0 - 127 | CC LSBの値 **1以上の場合のみ**送出 |
+| --- | --- | --- | --- | --- |
+| **Enable** | `enable` | 0 (Off) | 0 - 1 | 送信制御（1でNote On発行、0でNote Off発行） |
+| **Interval (ms)** | `interval_ms` | 20 | 1 - 2000 | CC/PBメッセージを送出する更新間隔 |
+| **Channel** | `channel` | 0 | 0 - 15 | 送信MIDIチャンネル（Ch 1 - 16） |
+| **Note Number** | `note_number` | 60 | 0 - 127 | ノート番号（C4 = 60） |
+| **Velocity** | `velocity` | 64 | 1 - 127 | ノートオン時のベロシティ |
+| **Pitch Bend** | `pb_value` | 0 | -8192 - 8191 | ピッチベンド値 |
+| **Breath (CC#2)** | `cc_breath` | 100 | 0 - 127 | ブレスコントロール（CC #2） |
+| **Expression (CC#11)** | `cc_expression` | 0 | 0 - 127 | エクスプレッション（CC #11） |
+| **Modulation (CC#1)** | `cc_modulation` | 0 | 0 - 127 | モジュレーション（CC #1） |
+| **Extra CC Num** | `cc_extra_num` | 7 | 0 - 127 | 任意割り当て用CC番号 |
+| **Extra CC Val** | `cc_extra_val` | 0 | 0 - 127 | 任意割り当て用CC値 |
+
